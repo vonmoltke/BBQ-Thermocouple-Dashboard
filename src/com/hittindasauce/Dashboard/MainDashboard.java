@@ -23,8 +23,13 @@
  *  and written by Jim Studt and others.  See OneWire.cpp for full copyright
  *  details.
  */
-
 package com.hittindasauce.Dashboard;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -47,213 +52,243 @@ public class MainDashboard extends javax.swing.JFrame {
     private void initComponents() {
 
         jFileChooser1 = new javax.swing.JFileChooser();
-        jOptionPane1 = new javax.swing.JOptionPane();
+        readme_window = new javax.swing.JFrame();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        readme_area = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        t1_readout = new javax.swing.JTextField();
+        t1_history = new javax.swing.JButton();
+        t2_readout = new javax.swing.JTextField();
+        t2_history = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
+        t3_readout = new javax.swing.JTextField();
+        t3_history = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
+        t4_readout = new javax.swing.JTextField();
+        t4_history = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jButton5 = new javax.swing.JButton();
+        t5_readout = new javax.swing.JTextField();
+        t5_history = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        jButton6 = new javax.swing.JButton();
+        t6_readout = new javax.swing.JTextField();
+        t6_history = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
-        jButton7 = new javax.swing.JButton();
+        t7_readout = new javax.swing.JTextField();
+        t7_history = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
-        jButton8 = new javax.swing.JButton();
+        t8_readout = new javax.swing.JTextField();
+        t8_history = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
-        jButton9 = new javax.swing.JButton();
+        ambient_readout = new javax.swing.JTextField();
+        ambient_history = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
-        jSpinner1 = new javax.swing.JSpinner();
+        polling_rate_setting = new javax.swing.JSpinner();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jButton10 = new javax.swing.JButton();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
+        change_polling_rate = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        status_area = new javax.swing.JTextArea();
+        man_menu_bar = new javax.swing.JMenuBar();
+        file_menu = new javax.swing.JMenu();
+        save_history_item = new javax.swing.JMenuItem();
+        save_status_item = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem7 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        exit_item = new javax.swing.JMenuItem();
+        device_menu = new javax.swing.JMenu();
+        configure_item = new javax.swing.JMenuItem();
+        connect_item = new javax.swing.JMenuItem();
+        help_menu = new javax.swing.JMenu();
+        readme_item = new javax.swing.JMenuItem();
+        about_item = new javax.swing.JMenuItem();
+
+        readme_window.setTitle("README");
+        readme_window.setMinimumSize(new java.awt.Dimension(400, 300));
+
+        readme_area.setColumns(20);
+        readme_area.setRows(5);
+        jScrollPane2.setViewportView(readme_area);
+
+        javax.swing.GroupLayout readme_windowLayout = new javax.swing.GroupLayout(readme_window.getContentPane());
+        readme_window.getContentPane().setLayout(readme_windowLayout);
+        readme_windowLayout.setHorizontalGroup(
+            readme_windowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(readme_windowLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 392, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        readme_windowLayout.setVerticalGroup(
+            readme_windowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, readme_windowLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
+                .addContainerGap())
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("BBQ Thermocouple Dashboard");
+        setName("mainWindow"); // NOI18N
         setResizable(false);
 
         jLabel1.setText("Thermocouple 1");
 
-        jTextField1.setEditable(false);
-        jTextField1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jTextField1.setText("0.000");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        t1_readout.setEditable(false);
+        t1_readout.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        t1_readout.setText("0.000");
+        t1_readout.setToolTipText("Readout for thermocouple 1");
+        t1_readout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                t1_readoutActionPerformed(evt);
             }
         });
 
-        jButton1.setText("History");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        t1_history.setText("History");
+        t1_history.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                t1_historyActionPerformed(evt);
             }
         });
 
-        jTextField2.setEditable(false);
-        jTextField2.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jTextField2.setText("0.000");
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        t2_readout.setEditable(false);
+        t2_readout.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        t2_readout.setText("0.000");
+        t2_readout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                t2_readoutActionPerformed(evt);
             }
         });
 
-        jButton2.setText("History");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        t2_history.setText("History");
+        t2_history.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                t2_historyActionPerformed(evt);
             }
         });
 
         jLabel2.setText("Thermocouple 2");
 
-        jTextField3.setEditable(false);
-        jTextField3.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jTextField3.setText("0.000");
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        t3_readout.setEditable(false);
+        t3_readout.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        t3_readout.setText("0.000");
+        t3_readout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                t3_readoutActionPerformed(evt);
             }
         });
 
-        jButton3.setText("History");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        t3_history.setText("History");
+        t3_history.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                t3_historyActionPerformed(evt);
             }
         });
 
         jLabel3.setText("Thermocouple 3");
 
-        jTextField4.setEditable(false);
-        jTextField4.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jTextField4.setText("0.000");
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        t4_readout.setEditable(false);
+        t4_readout.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        t4_readout.setText("0.000");
+        t4_readout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                t4_readoutActionPerformed(evt);
             }
         });
 
-        jButton4.setText("History");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        t4_history.setText("History");
+        t4_history.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                t4_historyActionPerformed(evt);
             }
         });
 
         jLabel4.setText("Thermocouple 4");
 
-        jTextField5.setEditable(false);
-        jTextField5.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jTextField5.setText("0.000");
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+        t5_readout.setEditable(false);
+        t5_readout.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        t5_readout.setText("0.000");
+        t5_readout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
+                t5_readoutActionPerformed(evt);
             }
         });
 
-        jButton5.setText("History");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        t5_history.setText("History");
+        t5_history.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                t5_historyActionPerformed(evt);
             }
         });
 
         jLabel5.setText("Thermocouple 5");
 
-        jTextField6.setEditable(false);
-        jTextField6.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jTextField6.setText("0.000");
-        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+        t6_readout.setEditable(false);
+        t6_readout.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        t6_readout.setText("0.000");
+        t6_readout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField6ActionPerformed(evt);
+                t6_readoutActionPerformed(evt);
             }
         });
 
-        jButton6.setText("History");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        t6_history.setText("History");
+        t6_history.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                t6_historyActionPerformed(evt);
             }
         });
 
         jLabel6.setText("Thermocouple 6");
 
-        jTextField7.setEditable(false);
-        jTextField7.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jTextField7.setText("0.000");
-        jTextField7.addActionListener(new java.awt.event.ActionListener() {
+        t7_readout.setEditable(false);
+        t7_readout.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        t7_readout.setText("0.000");
+        t7_readout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField7ActionPerformed(evt);
+                t7_readoutActionPerformed(evt);
             }
         });
 
-        jButton7.setText("History");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        t7_history.setText("History");
+        t7_history.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                t7_historyActionPerformed(evt);
             }
         });
 
         jLabel7.setText("Thermocouple 7");
 
-        jTextField8.setEditable(false);
-        jTextField8.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jTextField8.setText("0.000");
-        jTextField8.addActionListener(new java.awt.event.ActionListener() {
+        t8_readout.setEditable(false);
+        t8_readout.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        t8_readout.setText("0.000");
+        t8_readout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField8ActionPerformed(evt);
+                t8_readoutActionPerformed(evt);
             }
         });
 
-        jButton8.setText("History");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        t8_history.setText("History");
+        t8_history.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                t8_historyActionPerformed(evt);
             }
         });
 
         jLabel8.setText("Thermocouple 8");
 
-        jTextField9.setEditable(false);
-        jTextField9.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jTextField9.setText("0.000");
-        jTextField9.addActionListener(new java.awt.event.ActionListener() {
+        ambient_readout.setEditable(false);
+        ambient_readout.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        ambient_readout.setText("0.000");
+        ambient_readout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField9ActionPerformed(evt);
+                ambient_readoutActionPerformed(evt);
             }
         });
 
-        jButton9.setText("History");
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
+        ambient_history.setText("History");
+        ambient_history.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
+                ambient_historyActionPerformed(evt);
             }
         });
 
@@ -263,121 +298,161 @@ public class MainDashboard extends javax.swing.JFrame {
 
         jLabel11.setText("second(s)");
 
-        jButton10.setText("Change");
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
+        change_polling_rate.setText("Change");
+        change_polling_rate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
+                change_polling_rateActionPerformed(evt);
             }
         });
 
-        jMenu1.setText("File");
+        status_area.setColumns(20);
+        status_area.setEditable(false);
+        status_area.setRows(5);
+        jScrollPane1.setViewportView(status_area);
 
-        jMenuItem5.setText("Save history");
-        jMenu1.add(jMenuItem5);
+        file_menu.setText("File");
 
-        jMenuItem6.setText("Save status log");
-        jMenu1.add(jMenuItem6);
-        jMenu1.add(jSeparator1);
+        save_history_item.setText("Save history");
+        save_history_item.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                save_history_itemActionPerformed(evt);
+            }
+        });
+        file_menu.add(save_history_item);
 
-        jMenuItem7.setText("Exit");
-        jMenu1.add(jMenuItem7);
+        save_status_item.setText("Save status log");
+        save_status_item.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                save_status_itemActionPerformed(evt);
+            }
+        });
+        file_menu.add(save_status_item);
+        file_menu.add(jSeparator1);
 
-        jMenuBar1.add(jMenu1);
+        exit_item.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exit_itemActionPerformed(evt);
+            }
+        });
+        file_menu.add(exit_item);
 
-        jMenu2.setText("Device");
+        man_menu_bar.add(file_menu);
 
-        jMenuItem3.setText("Configure");
-        jMenu2.add(jMenuItem3);
+        device_menu.setText("Device");
 
-        jMenuItem4.setText("Connect");
-        jMenu2.add(jMenuItem4);
+        configure_item.setText("Configure");
+        configure_item.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                configure_itemActionPerformed(evt);
+            }
+        });
+        device_menu.add(configure_item);
 
-        jMenuBar1.add(jMenu2);
+        connect_item.setText("Connect");
+        connect_item.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                connect_itemActionPerformed(evt);
+            }
+        });
+        device_menu.add(connect_item);
 
-        jMenu3.setText("Help");
+        man_menu_bar.add(device_menu);
 
-        jMenuItem2.setText("Readme");
-        jMenu3.add(jMenuItem2);
+        help_menu.setText("Help");
 
-        jMenuItem1.setText("About");
-        jMenu3.add(jMenuItem1);
+        readme_item.setText("Readme");
+        readme_item.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                readme_itemActionPerformed(evt);
+            }
+        });
+        help_menu.add(readme_item);
 
-        jMenuBar1.add(jMenu3);
+        about_item.setText("About");
+        about_item.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                about_itemActionPerformed(evt);
+            }
+        });
+        help_menu.add(about_item);
 
-        setJMenuBar(jMenuBar1);
+        man_menu_bar.add(help_menu);
+
+        setJMenuBar(man_menu_bar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator2, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                             .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ambient_readout, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(7, 7, 7)
-                            .addComponent(jButton9))
+                            .addComponent(ambient_history))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(t1_readout, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1))
+                                .addComponent(t1_history))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(t2_readout, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2))
+                                .addComponent(t2_history))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(t3_readout, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton3))
+                                .addComponent(t3_history))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(t4_readout, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton4))
+                                .addComponent(t4_history))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(t5_readout, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton5))
+                                .addComponent(t5_history))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(t6_readout, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton6))
+                                .addComponent(t6_history))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(t7_readout, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton7))
+                                .addComponent(t7_history))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(t8_readout, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton8))))
-                    .addGroup(layout.createSequentialGroup()
+                                .addComponent(t8_history))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(polling_rate_setting, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton10)))
+                        .addComponent(change_polling_rate)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -386,160 +461,214 @@ public class MainDashboard extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(t1_readout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(t1_history))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                    .addComponent(t2_readout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(t2_history))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3))
+                    .addComponent(t3_readout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(t3_history))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4))
+                    .addComponent(t4_readout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(t4_history))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5))
+                    .addComponent(t5_readout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(t5_history))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton6))
+                    .addComponent(t6_readout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(t6_history))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton7))
+                    .addComponent(t7_readout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(t7_history))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton8))
+                    .addComponent(t8_readout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(t8_history))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton9)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ambient_history)
+                    .addComponent(ambient_readout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
                 .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(polling_rate_setting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11)
-                    .addComponent(jButton10))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(change_polling_rate))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void t1_readoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_t1_readoutActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_t1_readoutActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void t1_historyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_t1_historyActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_t1_historyActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void t2_readoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_t2_readoutActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_t2_readoutActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void t2_historyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_t2_historyActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_t2_historyActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void t3_readoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_t3_readoutActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_t3_readoutActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void t3_historyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_t3_historyActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_t3_historyActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void t4_readoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_t4_readoutActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_t4_readoutActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void t4_historyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_t4_historyActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_t4_historyActionPerformed
 
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+    private void t5_readoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_t5_readoutActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
+    }//GEN-LAST:event_t5_readoutActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void t5_historyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_t5_historyActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_t5_historyActionPerformed
 
-    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+    private void t6_readoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_t6_readoutActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField6ActionPerformed
+    }//GEN-LAST:event_t6_readoutActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void t6_historyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_t6_historyActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_t6_historyActionPerformed
 
-    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
+    private void t7_readoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_t7_readoutActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField7ActionPerformed
+    }//GEN-LAST:event_t7_readoutActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void t7_historyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_t7_historyActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_t7_historyActionPerformed
 
-    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
+    private void t8_readoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_t8_readoutActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField8ActionPerformed
+    }//GEN-LAST:event_t8_readoutActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+    private void t8_historyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_t8_historyActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton8ActionPerformed
+    }//GEN-LAST:event_t8_historyActionPerformed
 
-    private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField9ActionPerformed
+    private void ambient_readoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ambient_readoutActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField9ActionPerformed
+    }//GEN-LAST:event_ambient_readoutActionPerformed
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+    private void ambient_historyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ambient_historyActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton9ActionPerformed
+    }//GEN-LAST:event_ambient_historyActionPerformed
 
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+    private void change_polling_rateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_change_polling_rateActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton10ActionPerformed
+    }//GEN-LAST:event_change_polling_rateActionPerformed
+
+    private void exit_itemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exit_itemActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_exit_itemActionPerformed
+
+    private void about_itemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_about_itemActionPerformed
+        JOptionPane.showMessageDialog(this, "Test");
+    }//GEN-LAST:event_about_itemActionPerformed
+
+    private void save_history_itemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_history_itemActionPerformed
+        int return_val = jFileChooser1.showSaveDialog(this);
+
+        // Do the save stuff here
+
+        if (return_val == jFileChooser1.APPROVE_OPTION) {
+            status_area.append("Saved history\n");
+        }
+    }//GEN-LAST:event_save_history_itemActionPerformed
+
+    private void save_status_itemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_status_itemActionPerformed
+        int return_val = jFileChooser1.showSaveDialog(this);
+
+        // Do the save stuff here
+
+        if (return_val == jFileChooser1.APPROVE_OPTION) {
+            status_area.append("Saved status log\n");
+        }
+    }//GEN-LAST:event_save_status_itemActionPerformed
+
+    private void configure_itemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_configure_itemActionPerformed
+        status_area.append("Arduino interface configured\n");
+    }//GEN-LAST:event_configure_itemActionPerformed
+
+    private void connect_itemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connect_itemActionPerformed
+        status_area.append("Successfully connected to Arduino\n");
+    }//GEN-LAST:event_connect_itemActionPerformed
+
+    private void readme_itemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_readme_itemActionPerformed
+        readme_window.setVisible(true);
+    }//GEN-LAST:event_readme_itemActionPerformed
 
     /**
-    * @param args the command line arguments
-    */
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
+
             public void run() {
+                // Use the system native look and feel
+                try {
+                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(MainDashboard.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InstantiationException ex) {
+                    Logger.getLogger(MainDashboard.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IllegalAccessException ex) {
+                    Logger.getLogger(MainDashboard.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (UnsupportedLookAndFeelException ex) {
+                    Logger.getLogger(MainDashboard.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 new MainDashboard().setVisible(true);
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
+    private javax.swing.JMenuItem about_item;
+    private javax.swing.JButton ambient_history;
+    private javax.swing.JTextField ambient_readout;
+    private javax.swing.JButton change_polling_rate;
+    private javax.swing.JMenuItem configure_item;
+    private javax.swing.JMenuItem connect_item;
+    private javax.swing.JMenu device_menu;
+    private javax.swing.JMenuItem exit_item;
+    private javax.swing.JMenu file_menu;
+    private javax.swing.JMenu help_menu;
     private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -552,30 +681,33 @@ public class MainDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JOptionPane jOptionPane1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JMenuBar man_menu_bar;
+    private javax.swing.JSpinner polling_rate_setting;
+    private javax.swing.JTextArea readme_area;
+    private javax.swing.JMenuItem readme_item;
+    private javax.swing.JFrame readme_window;
+    private javax.swing.JMenuItem save_history_item;
+    private javax.swing.JMenuItem save_status_item;
+    private javax.swing.JTextArea status_area;
+    private javax.swing.JButton t1_history;
+    private javax.swing.JTextField t1_readout;
+    private javax.swing.JButton t2_history;
+    private javax.swing.JTextField t2_readout;
+    private javax.swing.JButton t3_history;
+    private javax.swing.JTextField t3_readout;
+    private javax.swing.JButton t4_history;
+    private javax.swing.JTextField t4_readout;
+    private javax.swing.JButton t5_history;
+    private javax.swing.JTextField t5_readout;
+    private javax.swing.JButton t6_history;
+    private javax.swing.JTextField t6_readout;
+    private javax.swing.JButton t7_history;
+    private javax.swing.JTextField t7_readout;
+    private javax.swing.JButton t8_history;
+    private javax.swing.JTextField t8_readout;
     // End of variables declaration//GEN-END:variables
-
 }
