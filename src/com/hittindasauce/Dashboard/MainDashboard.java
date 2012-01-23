@@ -27,9 +27,12 @@ package com.hittindasauce.Dashboard;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.JSeparator;
 
 /**
  *
@@ -93,8 +96,8 @@ public class MainDashboard extends javax.swing.JFrame {
         file_menu = new javax.swing.JMenu();
         save_history_item = new javax.swing.JMenuItem();
         save_status_item = new javax.swing.JMenuItem();
-        jSeparator1 = new javax.swing.JPopupMenu.Separator();
         exit_item = new javax.swing.JMenuItem();
+        exit_item.setText("Exit");
         device_menu = new javax.swing.JMenu();
         configure_item = new javax.swing.JMenuItem();
         connect_item = new javax.swing.JMenuItem();
@@ -327,13 +330,15 @@ public class MainDashboard extends javax.swing.JFrame {
             }
         });
         file_menu.add(save_status_item);
-        file_menu.add(jSeparator1);
 
         exit_item.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exit_itemActionPerformed(evt);
             }
         });
+        
+        JSeparator separator = new JSeparator();
+        file_menu.add(separator);
         file_menu.add(exit_item);
 
         man_menu_bar.add(file_menu);
@@ -608,7 +613,7 @@ public class MainDashboard extends javax.swing.JFrame {
 
         // Do the save stuff here
 
-        if (return_val == jFileChooser1.APPROVE_OPTION) {
+        if (return_val == JFileChooser.APPROVE_OPTION) {
             status_area.append("Saved history\n");
         }
     }//GEN-LAST:event_save_history_itemActionPerformed
@@ -618,7 +623,7 @@ public class MainDashboard extends javax.swing.JFrame {
 
         // Do the save stuff here
 
-        if (return_val == jFileChooser1.APPROVE_OPTION) {
+        if (return_val == JFileChooser.APPROVE_OPTION) {
             status_area.append("Saved status log\n");
         }
     }//GEN-LAST:event_save_status_itemActionPerformed
@@ -683,7 +688,6 @@ public class MainDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JMenuBar man_menu_bar;
     private javax.swing.JSpinner polling_rate_setting;
@@ -709,5 +713,4 @@ public class MainDashboard extends javax.swing.JFrame {
     private javax.swing.JTextField t7_readout;
     private javax.swing.JButton t8_history;
     private javax.swing.JTextField t8_readout;
-    // End of variables declaration//GEN-END:variables
 }
